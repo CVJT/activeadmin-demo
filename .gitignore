@@ -16,8 +16,6 @@
 /tmp
 
 *.war
-vendor
-public
 
 # IntelliJ files
 .idea
