@@ -1,5 +1,4 @@
 ActiveAdmin.register Order do
-  menu :priority => 3
   actions :index, :show
 
   filter :total_price
@@ -28,6 +27,8 @@ ActiveAdmin.register Order do
         end
       end
     end
+
+    active_admin_comments
   end
 
   sidebar :customer_information, :only => :show do

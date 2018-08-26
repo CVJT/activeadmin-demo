@@ -2,10 +2,6 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require File.expand_path('../config/application', __FILE__)
+require 'rake'
 
-require 'warbler'
-Warbler::Task.new
-
-Rake::Task['war'].enhance ['db:drop', 'db:create', 'db:migrate', 'db:seed']
-
-Rails.application.load_tasks
+ActiveadminDepot::Application.load_tasks

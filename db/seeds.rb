@@ -7,11 +7,18 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 #
 
-# Delete all the things!
-LineItem.delete_all
-Order.delete_all
-User.delete_all
-Product.delete_all
+# Create default admin user
+# AdminUser.create! do |a|
+#   a.email = 'admin@example.com'
+#   a.password = a.password_confirmation = 'password'
+# end
+
+# Create default user
+User.create! do |u|
+  u.username = 'user'
+  u.email = 'user@example.com'
+  u.password = u.password_confirmation = 'password'
+end
 
 # Load each product from the yaml file
 YAML.load_file(File.expand_path("../seeds/products.yml", __FILE__)).each do |product|
@@ -31,29 +38,18 @@ NB_USERS.times do |n|
   end
 end
 
-# Create 3 Gauge users
-["FredFlintstone", "JohnnyQuest", "ScroogeMcduck"].each do |cartoon|
-  User.create! do |u|
-    u.username = cartoon
-    u.email = "#{cartoon}@example.com"
-    u.password = u.password_confirmation = 'password'
-  end
-end
-
-
 # Create 300 Orders
 NB_ORDERS = 300
 
-user_ids = User.pluck(:id)
-product_ids = Product.pluck(:id)
-
 NB_ORDERS.times do
-  user = User.find(user_ids.sample)
+  user_id = rand(NB_USERS - 1) + 1
+  user = User.find(user_id)
   order = user.orders.create!
   nb_items = rand(9) + 1
 
   nb_items.times do
-    product = Product.find(product_ids.sample)
+    product_id = rand(NB_PRODUCTS - 1) + 1
+    product = Product.find(product_id)
     LineItem.create! do |l|
       l.order = order
       l.product = product

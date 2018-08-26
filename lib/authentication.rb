@@ -43,6 +43,6 @@ module Authentication
   private
 
   def store_target_location
-    session[:return_to] = request.url
+    session[:return_to] = request.request_uri
   end
 end
