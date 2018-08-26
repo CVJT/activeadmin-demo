@@ -1,7 +1,7 @@
 #ToDo: Update this file
 
 # Base image
-FROM ruby:2.1
+FROM ruby:latest
 
 ENV HOME /home/rails/webapp
 
